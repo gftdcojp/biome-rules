@@ -1,0 +1,56 @@
+{
+  "name": "@gftdcojp/biome-rules",
+  "version": "1.0.0",
+  "description": "ESLint-like configurable Biome rules for Next.js",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "biome-rules": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "config",
+    "rules",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "pnpm build",
+    "test": "vitest run",
+    "lint": "biome ci ."
+  },
+  "keywords": [
+    "biome",
+    "biome-rules",
+    "nextjs",
+    "eslint-like",
+    "lint",
+    "typescript"
+  ],
+  "author": "gftdcojp",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gftdcojp/biome-rules.git"
+  },
+  "peerDependencies": {
+    "@biomejs/biome": "^1.9.0"
+  },
+  "peerDependenciesMeta": {
+    "@biomejs/biome": {
+      "optional": false
+    }
+  },
+  "dependencies": {
+    "ts-morph": "^21.0.0",
+    "glob": "^11.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^1.0.0"
+  }
+}

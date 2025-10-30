@@ -1,0 +1,36 @@
+{
+  "rules": {
+    "@gftdcojp/nextjs-params": {
+      "name": "nextjs-params",
+      "description": "Check Next.js 14+ route handler params must be Promise<{ ... }>",
+      "category": "correctness",
+      "default": "error",
+      "requiresTypeCheck": true,
+      "options": {
+        "allowOptional": false,
+        "fixable": true
+      }
+    },
+    "@gftdcojp/nextjs-headers": {
+      "name": "nextjs-headers",
+      "description": "Check Next.js 14+ route handler headers handling",
+      "category": "correctness",
+      "default": "warn",
+      "requiresTypeCheck": true
+    }
+  },
+  "presets": {
+    "recommended": {
+      "@gftdcojp/nextjs-params": "error"
+    },
+    "strict": {
+      "@gftdcojp/nextjs-params": "error",
+      "@gftdcojp/nextjs-headers": "error"
+    },
+    "all": {
+      "@gftdcojp/nextjs-params": "error",
+      "@gftdcojp/nextjs-headers": "error"
+    }
+  }
+}
+

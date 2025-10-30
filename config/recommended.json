@@ -1,0 +1,22 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "error"
+      }
+    }
+  },
+  "files": {
+    "include": [
+      "**/app/api/**/route.ts",
+      "**/app/api/**/route.tsx"
+    ]
+  },
+  "biomeRules": {
+    "@gftdcojp/nextjs-params": "error"
+  }
+}
+

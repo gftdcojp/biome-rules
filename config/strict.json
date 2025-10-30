@@ -1,0 +1,9 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "extends": ["./recommended.json"],
+  "biomeRules": {
+    "@gftdcojp/nextjs-params": "error",
+    "@gftdcojp/nextjs-headers": "error"
+  }
+}
+
