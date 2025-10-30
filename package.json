@@ -1,6 +1,6 @@
 {
   "name": "@gftdcojp/biome-rules",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "ESLint-like configurable Biome rules for Next.js",
   "type": "module",
   "main": "./dist/index.js",
