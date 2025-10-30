@@ -61,6 +61,7 @@ async function main() {
       cwd: args.cwd || process.cwd(),
       tsConfigPath: args.tsconfig,
       options: normalized.options as never,
+      fix: args.fix === true,
     };
 
     try {
@@ -122,8 +123,15 @@ function loadBiomeConfig(configPath: string): ExtendedBiomeConfig {
   }
 }
 
-function parseArgs() {
-  const args: Record<string, string | undefined> = {};
+interface ParsedArgs {
+  config?: string;
+  tsconfig?: string;
+  cwd?: string;
+  fix?: boolean;
+}
+
+function parseArgs(): ParsedArgs {
+  const args: ParsedArgs = {};
   const argv = process.argv.slice(2);
 
   for (let i = 0; i < argv.length; i++) {
@@ -139,6 +147,9 @@ function parseArgs() {
         break;
       case "--cwd":
         args.cwd = argv[++i];
+        break;
+      case "--fix":
+        args.fix = true;
         break;
       case "--help":
       case "-h":
@@ -159,11 +170,13 @@ Options:
   -c, --config <path>    Path to biome.json (default: biome.json)
   -t, --tsconfig <path>  Path to tsconfig.json
   --cwd <path>           Working directory
-  -h, --help             Show this help message
+  --fix                   Automatically fix fixable violations
+  -h, implement --help    Show this help message
 
 Examples:
   biome-rules
   biome-rules --config custom-biome.json
+  biome-rules --fix
 `);
 }
 

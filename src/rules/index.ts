@@ -18,6 +18,7 @@ export const ruleHandlers: Record<string, RuleHandler> = {
       cwd: context.cwd,
       tsConfigPath: context.tsConfigPath,
       pattern: (context.options?.pattern as string) || "**/app/api/**/route.ts",
+      fix: context.fix || false,
     });
 
     return {

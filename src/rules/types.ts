@@ -14,6 +14,7 @@ export interface RuleContext {
   cwd: string;
   tsConfigPath?: string;
   options?: RuleOptions;
+  fix?: boolean;
 }
 
 export interface RuleViolation {
