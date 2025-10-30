@@ -13,7 +13,7 @@ const registry = loadRuleRegistry();
  * ルールハンドラーマップ
  */
 export const ruleHandlers: Record<string, RuleHandler> = {
-  "@gftdcojp/nextjs-params": async (context: RuleContext) => {
+  "@gftdcojp/nextjs-require-promise-params": async (context: RuleContext) => {
     const result = await checkNextJsParams({
       cwd: context.cwd,
       tsConfigPath: context.tsConfigPath,

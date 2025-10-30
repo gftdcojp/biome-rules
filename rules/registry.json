@@ -1,7 +1,7 @@
 {
   "rules": {
-    "@gftdcojp/nextjs-params": {
-      "name": "nextjs-params",
+    "@gftdcojp/nextjs-require-promise-params": {
+      "name": "nextjs-require-promise-params",
       "description": "Check Next.js 14+ route handler params must be Promise<{ ... }>",
       "category": "correctness",
       "default": "error",
@@ -21,14 +21,14 @@
   },
   "presets": {
     "recommended": {
-      "@gftdcojp/nextjs-params": "error"
+      "@gftdcojp/nextjs-require-promise-params": "error"
     },
     "strict": {
-      "@gftdcojp/nextjs-params": "error",
+      "@gftdcojp/nextjs-require-promise-params": "error",
       "@gftdcojp/nextjs-headers": "error"
     },
     "all": {
-      "@gftdcojp/nextjs-params": "error",
+      "@gftdcojp/nextjs-require-promise-params": "error",
       "@gftdcojp/nextjs-headers": "error"
     }
   }

@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rule registry with JSON-based configuration
 - Preset configurations (recommended, strict, all)
 - CLI tool for running rules
-- Next.js params validation rule (`@gftdcojp/nextjs-params`)
+- Next.js params validation rule (`@gftdcojp/nextjs-require-promise-params`)
 - TypeScript types for rules and configuration
 - Integration with Biome configuration files
 

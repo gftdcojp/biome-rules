@@ -21,7 +21,7 @@ pnpm add -D @gftdcojp/biome-rules @biomejs/biome
     "@gftdcojp/biome-rules/config/recommended.json"
   ],
   "biomeRules": {
-    "@gftdcojp/nextjs-params": "error"
+    "@gftdcojp/nextjs-require-promise-params": "error"
   }
 }
 ```
@@ -43,7 +43,7 @@ pnpm biome-rules
 ```json
 {
   "biomeRules": {
-    "@gftdcojp/nextjs-params": "error"
+    "@gftdcojp/nextjs-require-promise-params": "error"
   }
 }
 ```
@@ -53,7 +53,7 @@ pnpm biome-rules
 ```json
 {
   "biomeRules": {
-    "@gftdcojp/nextjs-params": ["error", {
+    "@gftdcojp/nextjs-require-promise-params": ["error", {
       "pattern": "**/app/api/**/route.ts",
       "fixable": true
     }]
@@ -84,7 +84,38 @@ pnpm biome-rules
 
 ## 📦 利用可能なルール
 
-- `@gftdcojp/nextjs-params`: Next.js 14+ route handlerのparams型チェック
+- `@gftdcojp/nextjs-require-promise-params`: Next.js 14+ route handlerのparams型チェック
+
+## 📝 ルール命名規則
+
+`@gftdcojp/biome-rules`のルール名は、ESLintの命名規則に準拠しています：
+
+### 基本原則
+
+1. **kebab-case**: 単語を小文字で記述し、ハイフン（`-`）で区切る
+   - 例: `nextjs-require-promise-params`
+
+2. **プレフィックスの使用**:
+   - `require-`: 特定の要件を必須とするルール
+   - `prefer-`: 特定の書き方を推奨するルール
+   - `no-`: 特定の動作を禁止するルール
+   - `enforce-`: 特定の規則を強制するルール
+
+3. **命名パターン**:
+   - `{framework}-{action}-{target}-{requirement}`
+   - 例: `nextjs-require-promise-params`
+     - `nextjs`: フレームワーク
+     - `require`: アクション（必須）
+     - `promise`: 要件
+     - `params`: 対象
+
+### 命名規則の適用例
+
+- ✅ `nextjs-require-promise-params` - Next.jsでparamsにPromiseを必須とする
+- ✅ `nextjs-no-sync-api` - Next.jsで同期APIの使用を禁止
+- ✅ `nextjs-prefer-server-components` - Next.jsでServer Componentsを推奨
+- ❌ `nextjsParams` - kebab-caseではない
+- ❌ `nextjs-params` - 要件が不明確
 
 ## 🔧 package.json統合
 

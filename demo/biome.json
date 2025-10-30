@@ -4,7 +4,7 @@
     "../config/recommended.json"
   ],
   "biomeRules": {
-    "@gftdcojp/nextjs-params": "error"
+    "@gftdcojp/nextjs-require-promise-params": "error"
   },
   "linter": {
     "enabled": true,

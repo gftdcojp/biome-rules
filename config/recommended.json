@@ -16,7 +16,7 @@
     ]
   },
   "biomeRules": {
-    "@gftdcojp/nextjs-params": "error"
+    "@gftdcojp/nextjs-require-promise-params": "error"
   }
 }
 
