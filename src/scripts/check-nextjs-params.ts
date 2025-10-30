@@ -3,7 +3,7 @@
  * Next.js route handler params validation using ts-morph
  */
 
-import { Project } from "ts-morph";
+import { Project, FunctionDeclaration, Node } from "ts-morph";
 import { glob } from "glob";
 import { resolve } from "path";
 
@@ -83,22 +83,20 @@ export async function checkNextJsParams(
 
         for (const declaration of declarations) {
           // 関数宣言をチェック
-          const funcDecl = declaration.asKind((d) =>
-            d.getKindName() === "FunctionDeclaration",
-          );
-          if (!funcDecl) {
+          if (!Node.isFunctionDeclaration(declaration)) {
             continue;
           }
 
-          const params = funcDecl.getParameters();
+          const funcDecl = declaration as FunctionDeclaration;
+          const parameters = funcDecl.getParameters();
 
-          if (params.length === 0) {
+          if (parameters.length < 2) {
             continue;
           }
 
-          // 最初のパラメータ（通常はrequest）をチェック
-          const firstParam = params[0];
-          const paramType = firstParam.getType();
+          // 2番目のパラメータ（通常は{ params }）をチェック
+          const secondParam = parameters[1];
+          const paramType = secondParam.getType();
 
           // オブジェクト型かチェック
           const properties = paramType.getProperties();
@@ -107,21 +105,45 @@ export async function checkNextJsParams(
           const paramsProperty = properties.find((p) => p.getName() === "params");
 
           if (paramsProperty) {
-            const paramsType = paramsProperty.getType();
-            const paramsTypeString = paramsType.getText();
+            // paramsの型を取得（SymbolからvalueDeclaration経由）
+            const valueDeclaration = paramsProperty.getValueDeclaration();
+            if (valueDeclaration) {
+              const paramsType = valueDeclaration.getType();
+              const paramsTypeString = paramsType.getText();
 
-            // Promiseでラップされているかチェック
-            if (!paramsTypeString.includes("Promise")) {
-              const lineAndColumn = firstParam.getStartLineAndColumn();
-              violations.push({
-                filePath,
-                line: lineAndColumn.line,
-                column: lineAndColumn.column,
-                message: `Next.js 14+ route handler "${name}" params must be Promise<{ ... }>. Found: ${paramsTypeString}`,
-                severity: "error",
-                fixable: true,
-                suggestedFix: `Wrap params type with Promise<...>`,
-              });
+              // Promiseでラップされているかチェック
+              if (!paramsTypeString.includes("Promise")) {
+                const lineAndColumn = secondParam.getStart();
+                const position = sourceFile.getLineAndColumnAtPos(lineAndColumn);
+                violations.push({
+                  filePath,
+                  line: position.line,
+                  column: position.column,
+                  message: `Next.js 14+ route handler "${name}" params must be Promise<{ ... }>. Found: ${paramsTypeString}`,
+                  severity: "error",
+                  fixable: true,
+                  suggestedFix: `Wrap params type with Promise<...>`,
+                });
+              }
+            } else {
+              // valueDeclarationがない場合、型から直接取得を試みる
+              const paramsType = paramType.getProperty("params")?.getTypeAtLocation(secondParam);
+              if (paramsType) {
+                const paramsTypeString = paramsType.getText();
+                if (!paramsTypeString.includes("Promise")) {
+                  const lineAndColumn = secondParam.getStart();
+                  const position = sourceFile.getLineAndColumnAtPos(lineAndColumn);
+                  violations.push({
+                    filePath,
+                    line: position.line,
+                    column: position.column,
+                    message: `Next.js 14+ route handler "${name}" params must be Promise<{ ... }>. Found: ${paramsTypeString}`,
+                    severity: "error",
+                    fixable: true,
+                    suggestedFix: `Wrap params type with Promise<...>`,
+                  });
+                }
+              }
             }
           }
         }

@@ -7,7 +7,6 @@
 import { readFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
-import type { PartialConfig } from "@biomejs/biome";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -16,8 +15,20 @@ export interface BiomeRulesConfig {
   [ruleName: string]: "off" | "warn" | "error" | [string, ...unknown[]];
 }
 
-export interface ExtendedBiomeConfig extends PartialConfig {
+export interface ExtendedBiomeConfig {
+  $schema?: string;
+  extends?: string[];
+  linter?: {
+    enabled?: boolean;
+    rules?: Record<string, unknown>;
+  };
+  formatter?: Record<string, unknown>;
+  files?: {
+    include?: string[];
+    ignore?: string[];
+  };
   biomeRules?: BiomeRulesConfig;
+  [key: string]: unknown;
 }
 
 /**
