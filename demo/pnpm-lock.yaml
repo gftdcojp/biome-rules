@@ -22,8 +22,8 @@ importers:
         specifier: ^1.9.0
         version: 1.9.4
       '@gftdcojp/biome-rules':
-        specifier: file:..
-        version: file:..(@biomejs/biome@1.9.4)
+        specifier: ^0.1.1
+        version: 0.1.1(@biomejs/biome@1.9.4)
       '@types/node':
         specifier: ^20.0.0
         version: 20.19.24
@@ -92,8 +92,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@gftdcojp/biome-rules@file:..':
-    resolution: {directory: .., type: directory}
+  '@gftdcojp/biome-rules@0.1.1':
+    resolution: {integrity: sha512-mZhkApYWhPn613CCxM2L4iouL7TOSUzpH2LlhUA/H0AeuZ83kDp8/Lc4CQU1e0/Ym6Inu+V+7gmUwBeDps88sw==}
     hasBin: true
     peerDependencies:
       '@biomejs/biome': ^1.9.0
@@ -537,7 +537,7 @@ snapshots:
   '@biomejs/cli-win32-x64@1.9.4':
     optional: true
 
-  '@gftdcojp/biome-rules@file:..(@biomejs/biome@1.9.4)':
+  '@gftdcojp/biome-rules@0.1.1(@biomejs/biome@1.9.4)':
     dependencies:
       '@biomejs/biome': 1.9.4
       glob: 11.0.3
